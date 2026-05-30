@@ -1,1650 +1,1522 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Librería Jurídica — Bufete de abogados especializado en derecho civil, laboral y corporativo. Consulta legal con resultados comprobados. Agenda tu consulta hoy." />
-  <title>Librería Jurídica | Asesoría Legal Profesional</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
-  <style>
-    /* =========================================
-       CSS VARIABLES & RESET
-    ========================================= */
-    :root {
-      --ink:       #0f0e0c;
-      --paper:     #f5f0e8;
-      --cream:     #ede7d9;
-      --gold:      #b8933a;
-      --gold-lt:   #d4a94e;
-      --rust:      #8b3a2a;
-      --slate:     #3a3730;
-      --muted:     #7a7468;
-      --white:     #ffffff;
-
-      --ff-display: 'Playfair Display', Georgia, serif;
-      --ff-body:    'DM Sans', system-ui, sans-serif;
-
-      --max-w: 1160px;
-      --r-sm:  6px;
-      --r-md:  12px;
-      --r-lg:  24px;
-
-      --shadow-card: 0 2px 24px rgba(15,14,12,.08);
-      --shadow-lift: 0 8px 40px rgba(15,14,12,.14);
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--ff-body);
-      background: var(--paper);
-      color: var(--ink);
-      font-size: 16px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    img { display: block; max-width: 100%; }
-    a { text-decoration: none; color: inherit; }
-
-    .container {
-      width: 100%;
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* =========================================
-       UTILITY CLASSES
-    ========================================= */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: var(--r-sm);
-      font-family: var(--ff-body);
-      font-size: .9rem;
-      font-weight: 600;
-      letter-spacing: .04em;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: all .2s ease;
-    }
-
-    .btn-primary {
-      background: var(--gold);
-      color: var(--white);
-      border-color: var(--gold);
-    }
-    .btn-primary:hover {
-      background: var(--gold-lt);
-      border-color: var(--gold-lt);
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(184,147,58,.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border-color: rgba(255,255,255,.6);
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,.12);
-      border-color: var(--white);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      color: var(--gold);
-      border-color: var(--gold);
-    }
-    .btn-ghost:hover {
-      background: var(--gold);
-      color: var(--white);
-    }
-
-    .section-label {
-      font-size: .72rem;
-      font-weight: 600;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-family: var(--ff-display);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      line-height: 1.2;
-      color: var(--ink);
-    }
-
-    .section-sub {
-      font-size: 1.05rem;
-      color: var(--muted);
-      max-width: 560px;
-      margin-top: 12px;
-      line-height: 1.7;
-    }
-
-    .divider {
-      width: 48px;
-      height: 3px;
-      background: var(--gold);
-      margin: 20px 0;
-    }
-
-    /* =========================================
-       TOP BAR
-    ========================================= */
-    .topbar {
-      background: var(--slate);
-      padding: 8px 0;
-      font-size: .8rem;
-      color: rgba(255,255,255,.72);
-    }
-    .topbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 4px;
-    }
-    .topbar a { color: rgba(255,255,255,.85); }
-    .topbar a:hover { color: var(--gold-lt); }
-
-    /* =========================================
-       NAVBAR
-    ========================================= */
-    .navbar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--white);
-      border-bottom: 1px solid var(--cream);
-      box-shadow: 0 2px 16px rgba(15,14,12,.06);
-    }
-
-    .navbar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 68px;
-    }
-
-    .logo {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.15;
-    }
-    .logo-main {
-      font-family: var(--ff-display);
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--ink);
-      letter-spacing: -.01em;
-    }
-    .logo-sub {
-      font-size: .68rem;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--gold);
-      font-weight: 500;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-size: .88rem;
-      font-weight: 500;
-      color: var(--slate);
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-
-    .nav-cta { display: flex; align-items: center; gap: 12px; }
-
-    /* Hamburger */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 4px;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: var(--ink);
-      border-radius: 2px;
-      transition: all .3s;
-    }
-
-    /* Mobile menu */
-    .mobile-menu {
-      display: none;
-      background: var(--white);
-      border-top: 1px solid var(--cream);
-      padding: 20px 24px;
-    }
-    .mobile-menu.open { display: block; }
-    .mobile-menu ul { list-style: none; }
-    .mobile-menu ul li { padding: 10px 0; border-bottom: 1px solid var(--cream); }
-    .mobile-menu ul li a { font-weight: 500; color: var(--slate); }
-    .mobile-menu .btn { width: 100%; justify-content: center; margin-top: 16px; }
-
-    /* =========================================
-       HERO
-    ========================================= */
-    .hero {
-      background: var(--ink);
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Textured background pattern */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(184,147,58,.12) 0%, transparent 70%),
-        repeating-linear-gradient(
-          -45deg,
-          rgba(255,255,255,.02) 0px,
-          rgba(255,255,255,.02) 1px,
-          transparent 1px,
-          transparent 8px
-        );
-      pointer-events: none;
-    }
-
-    /* Vertical gold accent line */
-    .hero::after {
-      content: '';
-      position: absolute;
-      left: 50%;
-      top: 0; bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(184,147,58,.3) 30%, rgba(184,147,58,.3) 70%, transparent);
-      pointer-events: none;
-    }
-
-    .hero .container {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
-    }
-
-    .hero-content {}
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(184,147,58,.15);
-      border: 1px solid rgba(184,147,58,.3);
-      border-radius: 40px;
-      padding: 6px 16px;
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 24px;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--gold-lt);
-    }
-
-    .hero h1 {
-      font-family: var(--ff-display);
-      font-size: clamp(2.2rem, 5vw, 3.6rem);
-      line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 20px;
-    }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--gold-lt);
-    }
-
-    .hero-sub {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,.72);
-      margin-bottom: 36px;
-      max-width: 480px;
-      line-height: 1.75;
-    }
-
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 48px;
-    }
-
-    .hero-trust {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .hero-trust-item {
-      display: flex;
-      flex-direction: column;
-    }
-    .hero-trust-num {
-      font-family: var(--ff-display);
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: var(--gold-lt);
-      line-height: 1;
-    }
-    .hero-trust-lbl {
-      font-size: .72rem;
-      color: rgba(255,255,255,.5);
-      letter-spacing: .06em;
-    }
-    .hero-trust-sep {
-      width: 1px; height: 36px;
-      background: rgba(255,255,255,.15);
-    }
-
-    /* Hero side panel */
-    .hero-panel {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: var(--r-lg);
-      padding: 36px;
-      backdrop-filter: blur(8px);
-    }
-    .hero-panel h2 {
-      font-family: var(--ff-display);
-      font-size: 1.4rem;
-      color: var(--white);
-      margin-bottom: 6px;
-    }
-    .hero-panel p {
-      font-size: .88rem;
-      color: rgba(255,255,255,.55);
-      margin-bottom: 24px;
-    }
-
-    /* Quick contact form placeholder */
-    .quick-form label {
-      display: block;
-      font-size: .78rem;
-      font-weight: 500;
-      color: rgba(255,255,255,.6);
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-    .quick-form input,
-    .quick-form select,
-    .quick-form textarea {
-      width: 100%;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.15);
-      border-radius: var(--r-sm);
-      padding: 12px 14px;
-      color: var(--white);
-      font-family: var(--ff-body);
-      font-size: .9rem;
-      margin-bottom: 16px;
-      outline: none;
-      transition: border-color .2s;
-    }
-    .quick-form input:focus,
-    .quick-form select:focus,
-    .quick-form textarea:focus {
-      border-color: var(--gold);
-    }
-    .quick-form select option { background: var(--slate); }
-    .quick-form textarea { resize: vertical; min-height: 80px; }
-    .quick-form .btn { width: 100%; justify-content: center; }
-
-    /* =========================================
-       TRUST BAR
-    ========================================= */
-    .trust-bar {
-      background: var(--cream);
-      border-bottom: 1px solid rgba(15,14,12,.08);
-      padding: 20px 0;
-    }
-    .trust-bar .container {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px 40px;
-      align-items: center;
-    }
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: .82rem;
-      font-weight: 500;
-      color: var(--slate);
-    }
-    .trust-icon {
-      width: 20px; height: 20px;
-      background: var(--gold);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .trust-icon svg { width: 11px; height: 11px; fill: none; stroke: white; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-
-    /* =========================================
-       SERVICES
-    ========================================= */
-    .services {
-      padding: 96px 0;
-      background: var(--paper);
-    }
-    .services-header {
-      max-width: 560px;
-      margin-bottom: 56px;
-    }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .service-card {
-      background: var(--white);
-      border: 1px solid rgba(15,14,12,.07);
-      border-radius: var(--r-lg);
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
-      transition: transform .25s, box-shadow .25s;
-    }
-    .service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lift);
-    }
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-lt));
-      opacity: 0;
-      transition: opacity .25s;
-    }
-    .service-card:hover::before { opacity: 1; }
-
-    .service-num {
-      font-family: var(--ff-display);
-      font-size: 3rem;
-      font-weight: 900;
-      color: var(--cream);
-      line-height: 1;
-      margin-bottom: 16px;
-      user-select: none;
-    }
-    .service-card h2 {
-      font-family: var(--ff-display);
-      font-size: 1.25rem;
-      margin-bottom: 10px;
-      color: var(--ink);
-    }
-    .service-card p {
-      font-size: .9rem;
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 20px;
-    }
-    .service-link {
-      font-size: .82rem;
-      font-weight: 600;
-      color: var(--gold);
-      letter-spacing: .04em;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: gap .2s;
-    }
-    .service-link:hover { gap: 8px; }
-
-    /* =========================================
-       EXPERIENCE / AUTHORITY
-    ========================================= */
-    .experience {
-      padding: 96px 0;
-      background: var(--ink);
-      position: relative;
-      overflow: hidden;
-    }
-    .experience::before {
-      content: '';
-      position: absolute;
-      right: -120px; top: -80px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(184,147,58,.08) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .experience .container {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .exp-left .section-label { color: var(--gold-lt); }
-    .exp-left .section-title { color: var(--white); }
-    .exp-left .section-sub { color: rgba(255,255,255,.6); max-width: 440px; }
-    .exp-left .divider { background: var(--gold); }
-
-    .exp-quote {
-      margin-top: 36px;
-      border-left: 3px solid var(--gold);
-      padding: 0 0 0 20px;
-    }
-    .exp-quote p {
-      font-family: var(--ff-display);
-      font-style: italic;
-      font-size: 1.1rem;
-      color: rgba(255,255,255,.7);
-      line-height: 1.6;
-    }
-    .exp-quote cite {
-      display: block;
-      margin-top: 10px;
-      font-style: normal;
-      font-size: .8rem;
-      color: var(--gold-lt);
-      letter-spacing: .06em;
-    }
-
-    .exp-right {}
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      border-radius: var(--r-md);
-      overflow: hidden;
-      margin-bottom: 28px;
-    }
-    .stat-box {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      padding: 28px 24px;
-      transition: background .2s;
-    }
-    .stat-box:hover { background: rgba(184,147,58,.08); }
-    .stat-box:nth-child(1) { border-radius: var(--r-md) 0 0 0; }
-    .stat-box:nth-child(2) { border-radius: 0 var(--r-md) 0 0; }
-    .stat-box:nth-child(3) { border-radius: 0 0 0 var(--r-md); }
-    .stat-box:nth-child(4) { border-radius: 0 0 var(--r-md) 0; }
-    .stat-num {
-      font-family: var(--ff-display);
-      font-size: 2.4rem;
-      font-weight: 900;
-      color: var(--gold-lt);
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: .8rem;
-      color: rgba(255,255,255,.5);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
-
-    .credentials {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .credential-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 16px 20px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.07);
-      border-radius: var(--r-sm);
-    }
-    .credential-icon {
-      width: 36px; height: 36px;
-      background: rgba(184,147,58,.15);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      font-size: 1rem;
-    }
-    .credential-text strong {
-      display: block;
-      font-size: .9rem;
-      color: var(--white);
-      font-weight: 600;
-    }
-    .credential-text span {
-      font-size: .8rem;
-      color: rgba(255,255,255,.45);
-    }
-
-    /* =========================================
-       HOW IT WORKS
-    ========================================= */
-    .process {
-      padding: 96px 0;
-      background: var(--cream);
-    }
-    .process-header { text-align: center; margin-bottom: 64px; }
-    .process-header .section-sub { margin: 12px auto 0; }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      position: relative;
-    }
-    .steps::before {
-      content: '';
-      position: absolute;
-      top: 32px;
-      left: 12.5%; right: 12.5%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-
-    .step {
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-    }
-    .step-num {
-      width: 64px; height: 64px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--gold);
-      font-family: var(--ff-display);
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      position: relative;
-      z-index: 1;
-    }
-    .step h3 {
-      font-family: var(--ff-display);
-      font-size: 1.05rem;
-      margin-bottom: 8px;
-      color: var(--ink);
-    }
-    .step p {
-      font-size: .85rem;
-      color: var(--muted);
-      line-height: 1.6;
-    }
-
-    /* =========================================
-       TESTIMONIALS
-    ========================================= */
-    .testimonials {
-      padding: 96px 0;
-      background: var(--paper);
-    }
-    .testimonials-header { margin-bottom: 56px; }
-
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .testimonial-card {
-      background: var(--white);
-      border: 1px solid rgba(15,14,12,.07);
-      border-radius: var(--r-lg);
-      padding: 32px;
-      box-shadow: var(--shadow-card);
-    }
-    .stars {
-      display: flex;
-      gap: 3px;
-      margin-bottom: 16px;
-    }
-    .star {
-      width: 14px; height: 14px;
-      background: var(--gold);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-    }
-    .testimonial-card blockquote {
-      font-size: .95rem;
-      color: var(--slate);
-      line-height: 1.75;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .author-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--rust));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--ff-display);
-      font-weight: 700;
-      color: var(--white);
-      font-size: .9rem;
-      flex-shrink: 0;
-    }
-    .author-info strong {
-      display: block;
-      font-size: .88rem;
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .author-info span {
-      font-size: .78rem;
-      color: var(--muted);
-    }
-
-    /* =========================================
-       APPOINTMENT SECTION (JOTFORM)
-    ========================================= */
-    .appointment {
-      padding: 96px 0;
-      background: var(--cream);
-    }
-    .appointment .container {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 72px;
-      align-items: start;
-    }
-
-    .appt-left .section-title { color: var(--ink); }
-    .appt-desc {
-      font-size: .95rem;
-      color: var(--muted);
-      line-height: 1.75;
-      margin-bottom: 32px;
-    }
-
-    .appt-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .appt-features li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: .9rem;
-      color: var(--slate);
-    }
-    .appt-features li::before {
-      content: '';
-      width: 18px; height: 18px;
-      border-radius: 50%;
-      background: var(--gold);
-      flex-shrink: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");
-      background-size: 11px;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .appt-contact {
-      background: var(--white);
-      border-radius: var(--r-md);
-      padding: 24px;
-      border: 1px solid rgba(15,14,12,.07);
-    }
-    .appt-contact p {
-      font-size: .82rem;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-    .appt-contact a {
-      font-weight: 600;
-      color: var(--ink);
-    }
-    .appt-contact a:hover { color: var(--gold); }
-
-    /* ─── JOTFORM EMBED CONTAINER ─── */
-    /*
-     * ============================================================
-     * INSTRUCCIÓN PARA EL DESARROLLADOR:
-     * Pega aquí tu código embed de Jotform dentro del div
-     * con id="jotform-embed". El iframe de Jotform reemplazará
-     * el contenido de marcador de posición que está a continuación.
-     *
-     * Ejemplo:
-     *   <iframe id="JotFormIFrame-XXXXXXXX" ... ></iframe>
-     *
-     * Asegúrate de que el iframe tenga: width="100%"
-     * ============================================================
-     */
-    .jotform-wrapper {
-      background: var(--white);
-      border-radius: var(--r-lg);
-      overflow: hidden;
-      border: 1px solid rgba(15,14,12,.07);
-      box-shadow: var(--shadow-card);
-      min-height: 500px;
-    }
-
-    #jotform-embed {
-      width: 100%;
-      min-height: 500px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Placeholder visual mientras no se incrusta Jotform */
-    .jotform-placeholder {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      padding: 40px 32px;
-      text-align: center;
-      color: var(--muted);
-    }
-    .jotform-placeholder-icon {
-      width: 64px; height: 64px;
-      border-radius: var(--r-md);
-      background: var(--cream);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-    .jotform-placeholder h3 {
-      font-family: var(--ff-display);
-      font-size: 1.2rem;
-      color: var(--ink);
-    }
-    .jotform-placeholder p {
-      font-size: .85rem;
-      max-width: 280px;
-    }
-    .jotform-placeholder code {
-      font-size: .78rem;
-      background: var(--cream);
-      padding: 6px 12px;
-      border-radius: 4px;
-      color: var(--rust);
-      font-family: monospace;
-    }
-
-    /* =========================================
-       CTA BANNER
-    ========================================= */
-    .cta-banner {
-      background: linear-gradient(135deg, var(--rust) 0%, #6b2a1c 100%);
-      padding: 72px 0;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-banner::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        rgba(255,255,255,.015) 0px,
-        rgba(255,255,255,.015) 1px,
-        transparent 1px,
-        transparent 12px
-      );
-    }
-    .cta-banner .container { position: relative; z-index: 1; }
-    .cta-banner h2 {
-      font-family: var(--ff-display);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      color: var(--white);
-      margin-bottom: 12px;
-    }
-    .cta-banner p {
-      color: rgba(255,255,255,.75);
-      font-size: 1.05rem;
-      margin-bottom: 32px;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-banner .btn-primary {
-      background: var(--gold);
-      border-color: var(--gold);
-      font-size: 1rem;
-      padding: 16px 36px;
-    }
-
-    /* =========================================
-       FOOTER
-    ========================================= */
-    .footer {
-      background: #080807;
-      padding: 64px 0 0;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-      gap: 48px;
-      padding-bottom: 48px;
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-
-    .footer-brand .logo-main { color: var(--white); font-size: 1.4rem; }
-    .footer-brand .logo-sub { }
-
-    .footer-tagline {
-      font-size: .85rem;
-      color: rgba(255,255,255,.4);
-      line-height: 1.7;
-      margin-top: 16px;
-      max-width: 240px;
-    }
-
-    .footer-col h4 {
-      font-size: .75rem;
-      font-weight: 600;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-      color: var(--gold-lt);
-      margin-bottom: 16px;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 10px; }
-    .footer-col ul li a {
-      font-size: .87rem;
-      color: rgba(255,255,255,.45);
-      transition: color .2s;
-    }
-    .footer-col ul li a:hover { color: rgba(255,255,255,.9); }
-
-    .footer-contact li {
-      font-size: .87rem;
-      color: rgba(255,255,255,.45);
-      margin-bottom: 10px;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .footer-contact li span { color: var(--gold-lt); flex-shrink: 0; }
-
-    .footer-bottom {
-      padding: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .footer-bottom p {
-      font-size: .78rem;
-      color: rgba(255,255,255,.25);
-    }
-    .footer-bottom a { color: rgba(255,255,255,.4); }
-    .footer-bottom a:hover { color: var(--gold-lt); }
-
-    /* =========================================
-       ANIMATIONS
-    ========================================= */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-badge  { animation: fadeUp .5s ease both; }
-    .hero h1     { animation: fadeUp .5s .1s ease both; }
-    .hero-sub    { animation: fadeUp .5s .2s ease both; }
-    .hero-actions{ animation: fadeUp .5s .3s ease both; }
-    .hero-trust  { animation: fadeUp .5s .4s ease both; }
-    .hero-panel  { animation: fadeUp .6s .15s ease both; }
-
-    /* =========================================
-       RESPONSIVE
-    ========================================= */
-    @media (max-width: 900px) {
-      .nav-links, .nav-cta { display: none; }
-      .hamburger { display: flex; }
-
-      .hero .container {
-        grid-template-columns: 1fr;
-        padding-top: 56px;
-        padding-bottom: 56px;
-      }
-      .hero::after { display: none; }
-      .hero-sub { max-width: 100%; }
-
-      .experience .container,
-      .appointment .container {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .steps {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-      }
-      .steps::before { display: none; }
-
-      .footer-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 36px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .topbar .container { justify-content: center; font-size: .72rem; }
-      .topbar .topbar-right { display: none; }
-
-      .hero h1 { font-size: 2rem; }
-      .hero-trust { gap: 16px; }
-
-      .stats-grid { grid-template-columns: 1fr 1fr; }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Librería Jurídica - Asesoría legal experta en Cochabamba, Bolivia. Derecho civil, laboral, comercial y penal. Agende su consulta hoy.">
+<title>Librería Jurídica | Asesoría Legal Experta en Bolivia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C4A35A;
+    --gold-light: #F0E0B0;
+    --gold-dark: #8B6914;
+    --ink: #0F1520;
+    --ink-soft: #1E2D45;
+    --slate: #3D4F6B;
+    --mist: #8B9BB4;
+    --fog: #E8EDF5;
+    --paper: #F7F5F0;
+    --white: #FFFFFF;
+    --ff-display: 'Playfair Display', Georgia, serif;
+    --ff-body: 'DM Sans', system-ui, sans-serif;
+    --radius: 4px;
+    --radius-lg: 12px;
+    --shadow: 0 4px 32px rgba(15,21,32,0.10);
+    --shadow-sm: 0 2px 12px rgba(15,21,32,0.07);
+    --transition: 0.25s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--ff-body);
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--ink);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── UTILITIES ─────────────────────────── */
+  .container {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .text-gold { color: var(--gold); }
+  .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); }
+
+  /* ── NAV ────────────────────────────────── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(15,21,32,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(196,163,90,0.25);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    gap: 16px;
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .nav-logo .brand {
+    font-family: var(--ff-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.01em;
+  }
+  .nav-logo .tagline {
+    font-size: 0.68rem;
+    font-weight: 400;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 32px;
+  }
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color var(--transition);
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .btn-nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 22px;
+    background: var(--gold);
+    color: var(--ink) !important;
+    font-size: 0.875rem !important;
+    font-weight: 600 !important;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background var(--transition), transform var(--transition);
+    white-space: nowrap;
+  }
+  .btn-nav:hover { background: #d4b46a; transform: translateY(-1px); }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--ink);
+    padding: 20px 24px 24px;
+    gap: 20px;
+    border-top: 1px solid rgba(196,163,90,0.2);
+  }
+  .mobile-menu a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    transition: color var(--transition);
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-menu .btn-mobile {
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    padding: 14px;
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 600;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: none;
+  }
+  .mobile-menu.open { display: flex; }
+
+  /* ── HERO ───────────────────────────────── */
+  .hero {
+    position: relative;
+    background: var(--ink);
+    overflow: hidden;
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+  }
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 60px, rgba(196,163,90,1) 60px, rgba(196,163,90,1) 61px),
+      repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(196,163,90,1) 60px, rgba(196,163,90,1) 61px);
+  }
+  .hero-accent {
+    position: absolute;
+    right: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(196,163,90,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    z-index: 2;
+    padding: 100px 0 80px;
+    max-width: 680px;
+  }
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+  }
+  h1 {
+    font-family: var(--ff-display);
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--white);
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-desc {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    max-width: 520px;
+    margin-bottom: 40px;
+    line-height: 1.75;
+  }
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: var(--ff-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition);
+  }
+  .btn-primary:hover { background: #d4b46a; transform: translateY(-2px); }
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 28px;
+    background: transparent;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--ff-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: var(--radius);
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.25);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-top: 64px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 40px;
+  }
+  .hero-stat {
+    padding-right: 48px;
+    margin-right: 48px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+  .hero-stat .number {
+    display: block;
+    font-family: var(--ff-display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .hero-stat .label {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── TRUST BAR ──────────────────────────── */
+  .trust-bar {
+    background: var(--paper);
+    border-bottom: 1px solid rgba(15,21,32,0.08);
+    padding: 20px 0;
+  }
+  .trust-bar-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 40px;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--slate);
+    letter-spacing: 0.02em;
+  }
+  .trust-item svg { flex-shrink: 0; }
+
+  /* ── SECTION COMMONS ────────────────────── */
+  section { padding: 96px 0; }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.73rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 16px;
+  }
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 2px;
+  }
+  h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
+  }
+  .section-intro {
+    font-size: 1.05rem;
+    color: var(--slate);
+    max-width: 560px;
+    line-height: 1.75;
+  }
+  .section-header { margin-bottom: 56px; }
+
+  /* ── SERVICES ───────────────────────────── */
+  .services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    background: rgba(15,21,32,0.06);
+    border: 1px solid rgba(15,21,32,0.06);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 36px 32px;
+    position: relative;
+    transition: background var(--transition);
+    cursor: default;
+  }
+  .service-card:hover { background: var(--paper); }
+  .service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    background: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  .service-icon svg { color: var(--gold-dark); }
+  h3 {
+    font-family: var(--ff-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .service-card p {
+    font-size: 0.9rem;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+  .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: var(--gold-dark);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: gap var(--transition);
+  }
+  .service-link:hover { gap: 8px; }
+
+  /* ── EXPERIENCE / ABOUT ─────────────────── */
+  .about { background: var(--ink); }
+  .about h2 { color: var(--white); }
+  .about .section-label { color: var(--gold); }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-left { }
+  .about-intro {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .about-pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .pillar {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .pillar-dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    margin-top: 9px;
+  }
+  .pillar-text strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .pillar-text p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+  .about-right { }
+  .credentials-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,163,90,0.2);
+    border-radius: var(--radius-lg);
+    padding: 36px;
+    margin-bottom: 24px;
+  }
+  .credentials-card .cred-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .cred-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .cred-list li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+  .cred-list li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    font-weight: 600;
+  }
+  .metrics-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .metric-box {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,163,90,0.15);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    text-align: center;
+  }
+  .metric-box .num {
+    font-family: var(--ff-display);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .metric-box .desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.45);
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ── PROCESS ────────────────────────────── */
+  .process { background: var(--paper); }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+    counter-reset: step;
+  }
+  .process-step { counter-increment: step; }
+  .step-number {
+    font-family: var(--ff-display);
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .process-step::before {
+    content: counter(step, decimal-leading-zero);
+    font-family: var(--ff-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    line-height: 1;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .process-step h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .process-step p {
+    font-size: 0.875rem;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ── TESTIMONIALS ───────────────────────── */
+  .testimonials { background: var(--white); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .testimonial-card {
+    background: var(--paper);
+    border: 1px solid rgba(15,21,32,0.07);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: relative;
+  }
+  .testimonial-card::before {
+    content: '\201C';
+    font-family: var(--ff-display);
+    font-size: 5rem;
+    color: var(--gold-light);
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .testimonial-card blockquote {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--ff-display);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-dark);
+    flex-shrink: 0;
+  }
+  .author-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .author-role {
+    font-size: 0.78rem;
+    color: var(--mist);
+  }
+  .stars {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
+  .stars svg { color: var(--gold); }
+
+  /* ── BOOKING / JOTFORM ──────────────────── */
+  .booking {
+    background: linear-gradient(135deg, var(--ink-soft) 0%, var(--ink) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .booking::before {
+    content: '';
+    position: absolute;
+    top: -120px;
+    right: -120px;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,163,90,0.12);
+    pointer-events: none;
+  }
+  .booking::after {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(196,163,90,0.08);
+    pointer-events: none;
+  }
+  .booking-inner {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .booking-left { }
+  .booking h2 { color: var(--white); }
+  .booking .section-label { color: var(--gold); }
+  .booking-desc {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  .booking-guarantees {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .booking-guarantees li {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+  }
+  .booking-guarantees li svg { flex-shrink: 0; color: var(--gold); }
+  .booking-right { }
+
+  /* ════════════════════════════════════════
+     JOTFORM EMBED CONTAINER
+     Pega aquí el código de inserción de Jotform.
+     Reemplaza el bloque .jotform-placeholder completo
+     con tu <script> o <iframe> de Jotform.
+  ════════════════════════════════════════ */
+  .jotform-embed-wrapper {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(196,163,90,0.25);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    min-height: 480px;
+    position: relative;
+  }
+  .jotform-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 32px;
+    text-align: center;
+    gap: 16px;
+    color: rgba(255,255,255,0.4);
+    min-height: 480px;
+  }
+  .jotform-placeholder svg { color: var(--gold); opacity: 0.6; }
+  .jotform-placeholder p { font-size: 0.875rem; line-height: 1.6; }
+  .jotform-placeholder code {
+    font-size: 0.78rem;
+    background: rgba(196,163,90,0.15);
+    color: var(--gold);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  /* ── FAQ ────────────────────────────────── */
+  .faq { background: var(--paper); }
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .faq-item {
+    background: var(--white);
+    border: 1px solid rgba(15,21,32,0.07);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 22px 24px;
+    font-family: var(--ff-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    transition: background var(--transition);
+  }
+  .faq-q:hover { background: var(--paper); }
+  .faq-q .arrow {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition);
+  }
+  .faq-q[aria-expanded="true"] .arrow { transform: rotate(45deg); }
+  .faq-a {
+    font-size: 0.875rem;
+    color: var(--slate);
+    line-height: 1.75;
+    padding: 0 24px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.25s ease;
+  }
+  .faq-a.open {
+    padding: 0 24px 22px;
+    max-height: 400px;
+  }
+
+  /* ── FOOTER ─────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.55);
+    padding: 64px 0 32px;
+    border-top: 1px solid rgba(196,163,90,0.15);
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .name {
+    font-family: var(--ff-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .footer-brand .sub {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .footer-brand p {
+    font-size: 0.875rem;
+    line-height: 1.75;
+    max-width: 300px;
+  }
+  .footer-col h4 {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  .footer-col ul li a:hover { color: var(--gold); }
+  .footer-contact-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.875rem;
+    margin-bottom: 12px;
+  }
+  .footer-contact-item svg { flex-shrink: 0; margin-top: 2px; color: var(--gold); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.78rem;
+  }
+  .footer-bottom a { color: var(--gold); text-decoration: none; }
+
+  /* ── FLOATING CTA ───────────────────────── */
+  .float-cta {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    display: none;
+  }
+  .float-cta a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px;
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 700;
+    font-size: 0.875rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 32px rgba(196,163,90,0.4);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  .float-cta a:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(196,163,90,0.5); }
+
+  /* ── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .booking-inner { grid-template-columns: 1fr; gap: 48px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .faq-grid { grid-template-columns: 1fr; }
+    .float-cta { display: block; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 600px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.7rem; }
+    .hero-stat { padding-right: 24px; margin-right: 24px; }
+    .hero-stats { gap: 0; }
+    .metrics-row { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+    section { padding: 56px 0; }
+    .float-cta a span { display: none; }
+    .float-cta a { padding: 16px; border-radius: 50%; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- ==================== TOP BAR ==================== -->
-  <div class="topbar">
+<!-- ══ NAVEGACIÓN ════════════════════════════════════════════════════ -->
+<header>
+  <nav role="navigation" aria-label="Navegación principal">
     <div class="container">
-      <span>📞 Consulta gratuita — llámenos hoy: <a href="tel:+59100000000">+591 (2) 000-0000</a></span>
-      <span class="topbar-right">
-        <a href="mailto:contacto@libreriajuridica.bo">contacto@libreriajuridica.bo</a>
-        &nbsp;|&nbsp;
-        Lun – Vie: 8:00 – 18:00
-      </span>
-    </div>
-  </div>
-
-  <!-- ==================== NAVBAR ==================== -->
-  <header class="navbar">
-    <div class="container">
-      <!-- Logo -->
-      <a href="#inicio" class="logo">
-        <span class="logo-main">Librería Jurídica</span>
-        <span class="logo-sub">Bufete de Abogados</span>
-      </a>
-
-      <!-- Desktop Nav -->
-      <nav>
-        <ul class="nav-links">
+      <div class="nav-inner">
+        <a href="#inicio" class="nav-logo" aria-label="Librería Jurídica - Inicio">
+          <span class="brand">Librería Jurídica</span>
+          <span class="tagline">Asesoría Legal · Cochabamba</span>
+        </a>
+        <ul class="nav-links" role="list">
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#experiencia">Experiencia</a></li>
-          <li><a href="#proceso">Cómo trabajamos</a></li>
-          <li><a href="#testimonios">Testimonios</a></li>
-          <li><a href="#contacto">Contacto</a></li>
+          <li><a href="#proceso">¿Cómo funciona?</a></li>
+          <li><a href="#testimonios">Casos</a></li>
+          <li><a href="#consulta" class="btn-nav">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Agendar Consulta
+          </a></li>
         </ul>
-      </nav>
+        <button class="hamburger" aria-label="Abrir menú" aria-expanded="false" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <a href="#servicios">Servicios</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#proceso">¿Cómo funciona?</a>
+      <a href="#testimonios">Testimonios</a>
+      <a href="#consulta" class="btn-mobile">
+        📅 Agendar Consulta
+      </a>
+    </div>
+  </nav>
+</header>
 
-      <div class="nav-cta">
-        <a href="tel:+59100000000" class="btn btn-ghost" style="padding:10px 18px;font-size:.82rem;">
-          ☎ Llamar
+<!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+<main>
+<section id="inicio" class="hero" aria-labelledby="hero-heading">
+  <div class="hero-pattern" aria-hidden="true"></div>
+  <div class="hero-accent" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-eyebrow" aria-label="Especialistas en derecho">Especialistas en Derecho</p>
+
+      <h1 id="hero-heading">
+        Su problema legal<br>merece una solución <em>experta.</em>
+      </h1>
+
+      <p class="hero-desc">
+        En Librería Jurídica, combinamos décadas de experiencia con un trato cercano y directo. No hablamos en términos complicados: trabajamos para que usted entienda cada paso de su proceso y recupere la tranquilidad que merece.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#consulta" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Agendar mi consulta
         </a>
-        <a href="#agendar" class="btn btn-primary" style="padding:10px 20px;font-size:.82rem;">
-          Agendar Consulta
+        <a href="#servicios" class="btn-ghost">
+          Ver nuestros servicios
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
 
-      <!-- Hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-      <ul>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#experiencia">Experiencia</a></li>
-        <li><a href="#proceso">Cómo trabajamos</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
-        <li><a href="#contacto">Contacto</a></li>
-      </ul>
-      <a href="#agendar" class="btn btn-primary">Agendar Consulta →</a>
-    </div>
-  </header>
-
-  <!-- ==================== HERO ==================== -->
-  <section class="hero" id="inicio">
-    <div class="container">
-      <div class="hero-content">
-        <div class="hero-badge">Bufete de Abogados — Bolivia</div>
-
-        <!-- H1 único de la página -->
-        <h1>Defensa legal <em>sólida</em> para los momentos que más importan</h1>
-
-        <p class="hero-sub">
-          En Librería Jurídica combinamos décadas de experiencia con un enfoque estratégico y cercano. No somos solo sus abogados; somos el equipo que protege lo que construyó con esfuerzo.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#agendar" class="btn btn-primary">Agendar consulta gratuita →</a>
-          <a href="#experiencia" class="btn btn-outline">Conocer nuestro equipo</a>
+      <div class="hero-stats" aria-label="Estadísticas de experiencia">
+        <div class="hero-stat">
+          <span class="number">+15</span>
+          <span class="label">Años de experiencia</span>
         </div>
-
-        <div class="hero-trust">
-          <div class="hero-trust-item">
-            <span class="hero-trust-num">+20</span>
-            <span class="hero-trust-lbl">Años de trayectoria</span>
-          </div>
-          <div class="hero-trust-sep"></div>
-          <div class="hero-trust-item">
-            <span class="hero-trust-num">+850</span>
-            <span class="hero-trust-lbl">Casos resueltos</span>
-          </div>
-          <div class="hero-trust-sep"></div>
-          <div class="hero-trust-item">
-            <span class="hero-trust-num">96%</span>
-            <span class="hero-trust-lbl">Tasa de éxito</span>
-          </div>
+        <div class="hero-stat">
+          <span class="number">+800</span>
+          <span class="label">Casos resueltos</span>
         </div>
-      </div>
-
-      <!-- Panel lateral con mini formulario de contacto rápido -->
-      <div class="hero-panel">
-        <h2>Cuéntenos su caso</h2>
-        <p>Complete el formulario y le contactaremos en menos de 2 horas hábiles.</p>
-        <div class="quick-form">
-          <label for="h-nombre">Nombre completo</label>
-          <input type="text" id="h-nombre" placeholder="Ej. Juan Mamani" />
-
-          <label for="h-tel">Teléfono / WhatsApp</label>
-          <input type="tel" id="h-tel" placeholder="+591 7xx xxxxx" />
-
-          <label for="h-area">Área legal</label>
-          <select id="h-area">
-            <option value="" disabled selected>Seleccione una área…</option>
-            <option>Derecho Civil</option>
-            <option>Derecho Laboral</option>
-            <option>Derecho Penal</option>
-            <option>Derecho Corporativo</option>
-            <option>Derecho de Familia</option>
-            <option>Otra</option>
-          </select>
-
-          <label for="h-msg">Descripción breve</label>
-          <textarea id="h-msg" placeholder="Describa brevemente su situación…"></textarea>
-
-          <a href="#agendar" class="btn btn-primary">Solicitar orientación →</a>
+        <div class="hero-stat">
+          <span class="number">98%</span>
+          <span class="label">Clientes satisfechos</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ==================== TRUST BAR ==================== -->
-  <div class="trust-bar">
-    <div class="container">
+<!-- ══ BARRA DE CONFIANZA ═════════════════════════════════════════════ -->
+<div class="trust-bar" role="complementary" aria-label="Señales de confianza">
+  <div class="container">
+    <div class="trust-bar-inner">
       <div class="trust-item">
-        <div class="trust-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Confidencialidad garantizada
       </div>
       <div class="trust-item">
-        <div class="trust-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        Primera consulta sin costo
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Respuesta en menos de 24 h
       </div>
       <div class="trust-item">
-        <div class="trust-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        Colegiados y habilitados
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 012 1.18 2 2 0 014 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+        Primera consulta orientativa
       </div>
       <div class="trust-item">
-        <div class="trust-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        Atención en 24 horas
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">
-          <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        Honorarios transparentes
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Colegiados y certificados
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ==================== SERVICES ==================== -->
-  <section class="services" id="servicios">
-    <div class="container">
-      <div class="services-header">
-        <p class="section-label">Áreas de práctica</p>
-        <h2 class="section-title">Encontramos la solución legal que usted necesita</h2>
-        <div class="divider"></div>
-        <p class="section-sub">Cada área cuenta con especialistas dedicados que conocen los matices del sistema jurídico boliviano y trabajan con estrategia para proteger sus intereses.</p>
-      </div>
-
-      <div class="services-grid">
-
-        <div class="service-card">
-          <div class="service-num">01</div>
-          <h2>Derecho Civil</h2>
-          <p>Contratos, propiedades, herencias y responsabilidad civil. Lo acompañamos desde la negociación hasta la ejecución de sentencias.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-num">02</div>
-          <h2>Derecho Laboral</h2>
-          <p>Despidos injustificados, beneficios sociales, derechos del trabajador y asesoría para empresas en gestión de nóminas y compliance laboral.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-num">03</div>
-          <h2>Derecho Penal</h2>
-          <p>Defensa técnica desde la investigación previa hasta la etapa de juicio. Actuamos con rapidez cuando la libertad o la reputación están en juego.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-num">04</div>
-          <h2>Derecho Corporativo</h2>
-          <p>Constitución de empresas, contratos comerciales, fusiones y adquisiciones, y protección de activos. Blindamos su negocio desde el inicio.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-num">05</div>
-          <h2>Derecho de Familia</h2>
-          <p>Divorcios, custodia, pensiones alimenticias y sucesiones. Manejamos los procesos más delicados con sensibilidad y firmeza.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-        <div class="service-card">
-          <div class="service-num">06</div>
-          <h2>Derecho Administrativo</h2>
-          <p>Licitaciones, recursos de revocatoria, licencias, regulatorio y relaciones con entidades del Estado. Navegamos la burocracia por usted.</p>
-          <a href="#agendar" class="service-link">Consultar este servicio →</a>
-        </div>
-
-      </div>
+<!-- ══ SERVICIOS ══════════════════════════════════════════════════════ -->
+<section id="servicios" class="services" aria-labelledby="servicios-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Áreas de Práctica</p>
+      <h2 id="servicios-heading">¿Qué problema legal<br>podemos resolver por usted?</h2>
+      <p class="section-intro">Cubrimos las principales ramas del derecho boliviano con equipos especializados para cada área.</p>
     </div>
-  </section>
 
-  <!-- ==================== EXPERIENCE / AUTHORITY ==================== -->
-  <section class="experience" id="experiencia">
-    <div class="container">
-      <div class="exp-left">
-        <p class="section-label">Nuestra trayectoria</p>
-        <h2 class="section-title">Más de dos décadas construyendo confianza</h2>
-        <div class="divider"></div>
-        <p class="section-sub">
-          Fundado en La Paz, Librería Jurídica nació con la convicción de que la justicia debe ser accesible, comprensible y efectiva. Hoy somos uno de los bufetes de referencia en Bolivia, con una trayectoria forjada caso a caso, cliente a cliente.
+    <div class="services-grid" role="list">
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h3>Derecho Civil y Familiar</h3>
+        <p>Divorcios, sucesiones, contratos, arrendamientos y todo lo relacionado con el ámbito civil y de familia.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        </div>
+        <h3>Derecho Laboral</h3>
+        <p>Despidos injustificados, beneficios sociales, acoso laboral, demandas del empleado y defensa del empleador.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        </div>
+        <h3>Derecho Comercial y Empresarial</h3>
+        <p>Constitución de empresas, contratos mercantiles, resolución de disputas comerciales y reestructuración societaria.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Derecho Penal</h3>
+        <p>Defensa y representación en procesos penales. Asesoría desde la etapa investigativa hasta la sentencia.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7"/><rect x="4" y="9" width="16" height="13" rx="1"/><rect x="9" y="14" width="6" height="8" rx="1"/></svg>
+        </div>
+        <h3>Derecho Inmobiliario</h3>
+        <p>Saneamiento de títulos, compraventa de bienes inmuebles, regularización de propiedades y DDRR.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+
+      <article class="service-card" role="listitem">
+        <div class="service-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <h3>Consultoría Tributaria</h3>
+        <p>Asesoramiento ante el SIN, impugnación de deudas fiscales, planificación tributaria para empresas y personas.</p>
+        <a href="#consulta" class="service-link">
+          Consultar este caso
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCIA & AUTORIDAD ════════════════════════════════════════ -->
+<section id="experiencia" class="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left">
+        <p class="section-label">Nuestra Experiencia</p>
+        <h2 id="about-heading">Por qué confiar en nosotros para defender lo suyo</h2>
+        <p class="about-intro">
+          Durante más de 15 años, Librería Jurídica ha acompañado a familias y empresas cochabambinas en sus momentos más difíciles. No somos un bufete que procesa expedientes; somos un equipo que entiende que detrás de cada caso hay una persona con inquietudes reales.
         </p>
-        <p class="section-sub" style="margin-top:16px;">
-          Nuestro equipo de abogados se especializa constantemente, participando en coloquios nacionales e internacionales, para traer a cada expediente las herramientas jurídicas más actualizadas.
+        <div class="about-pillars">
+          <div class="pillar">
+            <div class="pillar-dot" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <strong>Estrategia, no improvisación</strong>
+              <p>Analizamos cada caso con profundidad antes de proponer un camino. Su tiempo y recursos son valiosos.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-dot" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <strong>Comunicación constante</strong>
+              <p>Le informamos de cada avance. Usted nunca quedará sin saber qué está pasando con su proceso.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <div class="pillar-dot" aria-hidden="true"></div>
+            <div class="pillar-text">
+              <strong>Honorarios claros desde el inicio</strong>
+              <p>Sin sorpresas. Le presentamos una propuesta detallada antes de comenzar cualquier trabajo.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-right">
+        <div class="credentials-card" role="region" aria-label="Credenciales y formación">
+          <p class="cred-label">Formación y Credenciales</p>
+          <ul class="cred-list">
+            <li>Abogados titulados y colegiados ante el Colegio de Abogados de Cochabamba</li>
+            <li>Posgrado en Litigación Oral y Derecho Constitucional</li>
+            <li>Especialización en Derecho Empresarial y Compliance</li>
+            <li>Miembros activos de asociaciones jurídicas nacionales</li>
+            <li>Capacitación continua en legislación boliviana actualizada</li>
+          </ul>
+        </div>
+        <div class="metrics-row" aria-label="Resultados en cifras">
+          <div class="metric-box">
+            <span class="num">+800</span>
+            <span class="desc">Casos cerrados</span>
+          </div>
+          <div class="metric-box">
+            <span class="num">15+</span>
+            <span class="desc">Años activos</span>
+          </div>
+          <div class="metric-box">
+            <span class="num">6</span>
+            <span class="desc">Áreas de práctica</span>
+          </div>
+          <div class="metric-box">
+            <span class="num">98%</span>
+            <span class="desc">Satisfacción</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROCESO ════════════════════════════════════════════════════════ -->
+<section id="proceso" class="process" aria-labelledby="proceso-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">¿Cómo trabajamos?</p>
+      <h2 id="proceso-heading">De la consulta a la resolución:<br>un proceso claro y ordenado</h2>
+    </div>
+    <div class="process-steps" role="list">
+      <div class="process-step" role="listitem">
+        <h3>Agende su consulta</h3>
+        <p>Use el formulario de esta página para reservar su espacio. En menos de 24 horas le confirmamos la cita y le indicamos qué documentos traer.</p>
+      </div>
+      <div class="process-step" role="listitem">
+        <h3>Diagnóstico jurídico</h3>
+        <p>En la primera reunión analizamos su situación en detalle, le explicamos sus derechos y evaluamos juntos las alternativas disponibles.</p>
+      </div>
+      <div class="process-step" role="listitem">
+        <h3>Propuesta y estrategia</h3>
+        <p>Le presentamos un plan de acción concreto, incluyendo tiempos estimados y honorarios claros antes de iniciar cualquier gestión.</p>
+      </div>
+      <div class="process-step" role="listitem">
+        <h3>Ejecución y seguimiento</h3>
+        <p>Gestionamos cada etapa del proceso y le mantenemos informado. Usted se desentiende de trámites y nosotros trabajamos por su resultado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIOS ════════════════════════════════════════════════════ -->
+<section id="testimonios" class="testimonials" aria-labelledby="testimonios-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Lo que dicen nuestros clientes</p>
+      <h2 id="testimonios-heading">Resultados que hablan por sí solos</h2>
+    </div>
+    <div class="testimonials-grid">
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 estrellas">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>Tenía un conflicto laboral que me quitaba el sueño desde hace meses. El equipo de Librería Jurídica me explicó todo con claridad y resolvieron mi caso en tiempo récord. Recuperé todos mis beneficios sociales.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">MR</div>
+          <div>
+            <p class="author-name">Marco R.</p>
+            <p class="author-role">Caso Laboral · Cochabamba</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 estrellas">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>Necesitaba constituir mi empresa y regularizar un inmueble a la vez. Lo manejaron todo de forma coordinada, con fechas claras y sin complicaciones. Los recomendaría sin dudarlo.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">CP</div>
+          <div>
+            <p class="author-name">Carmen P.</p>
+            <p class="author-role">Derecho Comercial · Cochabamba</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="stars" aria-label="5 estrellas">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <blockquote>Afronté un proceso penal con mucho miedo. Desde el primer día me explicaron la situación con honestidad y me defendieron con enorme profesionalismo. El resultado fue mejor de lo que esperaba.</blockquote>
+        <div class="testimonial-author">
+          <div class="author-avatar" aria-hidden="true">JV</div>
+          <div>
+            <p class="author-name">José V.</p>
+            <p class="author-role">Derecho Penal · Cochabamba</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONSULTA / JOTFORM ═════════════════════════════════════════════ -->
+<section id="consulta" class="booking" aria-labelledby="booking-heading">
+  <div class="container">
+    <div class="booking-inner">
+      <div class="booking-left">
+        <p class="section-label">Agendar Consulta</p>
+        <h2 id="booking-heading">El primer paso hacia la solución comienza aquí</h2>
+        <p class="booking-desc">
+          Complete el formulario y un miembro de nuestro equipo se pondrá en contacto con usted en menos de 24 horas para confirmar su cita y orientarle sobre los documentos que necesita traer.
         </p>
-
-        <div class="exp-quote">
-          <p>"Nuestra obligación no termina con ganar el caso; termina cuando el cliente recobra la tranquilidad que merece."</p>
-          <cite>— Dr. [Nombre del Socio Principal], Fundador</cite>
-        </div>
-      </div>
-
-      <div class="exp-right">
-        <div class="stats-grid">
-          <div class="stat-box">
-            <div class="stat-num">+20</div>
-            <div class="stat-label">Años de ejercicio<br>profesional</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num">+850</div>
-            <div class="stat-label">Casos exitosos<br>concluidos</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num">12</div>
-            <div class="stat-label">Abogados<br>especializados</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-num">96%</div>
-            <div class="stat-label">Resolución<br>favorable</div>
-          </div>
-        </div>
-
-        <div class="credentials">
-          <div class="credential-item">
-            <div class="credential-icon">🎓</div>
-            <div class="credential-text">
-              <strong>Colegio de Abogados de La Paz</strong>
-              <span>Matriculados y habilitados — N.° de matrícula disponible</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-icon">🏛️</div>
-            <div class="credential-text">
-              <strong>Tribunal Supremo de Justicia</strong>
-              <span>Litigantes autorizados ante instancias nacionales</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-icon">🌐</div>
-            <div class="credential-text">
-              <strong>Red Internacional de Bufetes</strong>
-              <span>Asociados a redes jurídicas latinoamericanas</span>
-            </div>
-          </div>
-          <div class="credential-item">
-            <div class="credential-icon">📚</div>
-            <div class="credential-text">
-              <strong>Publicaciones y Docencia</strong>
-              <span>Autores de artículos jurídicos y docentes universitarios</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== HOW IT WORKS ==================== -->
-  <section class="process" id="proceso">
-    <div class="container">
-      <div class="process-header">
-        <p class="section-label">Cómo trabajamos</p>
-        <h2 class="section-title">Cuatro pasos hacia la resolución de su caso</h2>
-        <p class="section-sub">Un proceso claro, sin sorpresas y orientado a resultados.</p>
-      </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <h3>Consulta inicial</h3>
-          <p>Escuchamos su caso sin juicios. Le explicamos sus opciones legales con claridad y honestidad.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <h3>Análisis estratégico</h3>
-          <p>Estudiamos a fondo la documentación y diseñamos la estrategia con mayor probabilidad de éxito.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <h3>Ejecución y seguimiento</h3>
-          <p>Actuamos con rigor y le mantenemos informado en cada etapa del proceso jurídico.</p>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <h3>Resolución</h3>
-          <p>Cerramos el caso con la solución que protege sus derechos y le devolvemos la tranquilidad.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== TESTIMONIALS ==================== -->
-  <section class="testimonials" id="testimonios">
-    <div class="container">
-      <div class="testimonials-header">
-        <p class="section-label">Lo que dicen nuestros clientes</p>
-        <h2 class="section-title">Historias reales de resultados reales</h2>
-        <div class="divider"></div>
-      </div>
-
-      <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-          <blockquote>"Cuando mi empresa enfrentó una demanda laboral que parecía perdida, Librería Jurídica encontró argumentos que nadie más había visto. Ganamos el caso y seguimos creciendo con su asesoría."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">RM</div>
-            <div class="author-info">
-              <strong>Roberto Mendoza</strong>
-              <span>Empresario, sector construcción</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-          <blockquote>"Atravesé un divorcio complicado con hijos pequeños. El Dr. [Apellido] fue firme donde tenía que serlo y humano cuando lo necesité. Logré la custodia compartida que pedí desde el principio."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">PV</div>
-            <div class="author-info">
-              <strong>Patricia Vásquez</strong>
-              <span>Docente universitaria</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
-          <blockquote>"Después de 3 años de litigio por una propiedad heredada, en menos de 8 meses con Librería Jurídica resolvimos todo. Su conocimiento del derecho civil es extraordinario."</blockquote>
-          <div class="testimonial-author">
-            <div class="author-avatar">JC</div>
-            <div class="author-info">
-              <strong>Jorge Condori</strong>
-              <span>Comerciante, La Paz</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== APPOINTMENT (JOTFORM) ==================== -->
-  <section class="appointment" id="agendar">
-    <div class="container">
-
-      <div class="appt-left">
-        <p class="section-label">Agendar consulta</p>
-        <h2 class="section-title">Dé el primer paso hacia la solución</h2>
-        <div class="divider"></div>
-        <p class="appt-desc">
-          La primera consulta es completamente gratuita y confidencial. En 45 minutos conoceremos su situación y le daremos una orientación clara sobre sus opciones legales, sin compromisos.
-        </p>
-
-        <ul class="appt-features">
-          <li>Consulta inicial sin costo</li>
-          <li>Confidencialidad absoluta garantizada</li>
-          <li>Respuesta en menos de 2 horas hábiles</li>
-          <li>Disponibilidad de lunes a viernes, 8:00 – 18:00</li>
-          <li>Atención presencial o por videollamada</li>
+        <ul class="booking-guarantees">
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Sin compromiso de contratación
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Tratamos su caso con absoluta confidencialidad
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Atención presencial y en línea disponible
+          </li>
+          <li>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+            Confirmación en menos de 24 horas
+          </li>
         </ul>
-
-        <div class="appt-contact">
-          <p>¿Prefiere contactarnos directamente?</p>
-          <p>📞 <a href="tel:+59100000000">+591 (2) 000-0000</a> &nbsp;|&nbsp; 💬 <a href="https://wa.me/59100000000" target="_blank">WhatsApp</a></p>
-          <p>✉️ <a href="mailto:contacto@libreriajuridica.bo">contacto@libreriajuridica.bo</a></p>
-        </div>
       </div>
 
-      <!-- ╔══════════════════════════════════════════════════════╗ -->
-      <!-- ║  CONTENEDOR DE JOTFORM                              ║ -->
-      <!-- ║  Pegue aquí su código embed de Jotform              ║ -->
-      <!-- ║  dentro del div id="jotform-embed"                  ║ -->
-      <!-- ╚══════════════════════════════════════════════════════╝ -->
-      <div class="jotform-wrapper">
-        <div id="jotform-embed">
+      <div class="booking-right">
+        <!--
+        ═══════════════════════════════════════════════════════════
+        ZONA DE INSERCIÓN DE JOTFORM
+        -------------------------------------------------------
+        Reemplaza el bloque <div class="jotform-placeholder">...</div>
+        por tu código embed de Jotform. Ejemplo:
 
-          <!-- ELIMINE este bloque placeholder cuando pegue su embed de Jotform -->
-          <div class="jotform-placeholder">
-            <div class="jotform-placeholder-icon">📋</div>
-            <h3>Formulario de Agendamiento</h3>
-            <p>Pegue aquí su código embed de Jotform para que los clientes puedan agendar su consulta.</p>
-            <code>&lt;!-- PEGAR EMBED JOTFORM AQUÍ --&gt;</code>
+        <script type="text/javascript" src="https://form.jotform.com/jsform/TU_FORM_ID"></script>
+
+        o con iframe:
+
+        <iframe
+          id="JotFormIFrame-TU_FORM_ID"
+          title="Formulario de Agendamiento"
+          onload="window.parent.scrollTo(0,0)"
+          allowtransparency="true"
+          allowfullscreen="true"
+          allow="geolocation; microphone; camera"
+          src="https://form.jotform.com/TU_FORM_ID"
+          frameborder="0"
+          style="min-width:100%;max-width:100%;height:539px;border:none;"
+          scrolling="no">
+        </iframe>
+        ═══════════════════════════════════════════════════════════
+        -->
+        <div class="jotform-embed-wrapper" role="region" aria-label="Formulario de agendamiento de consulta">
+          <div class="jotform-placeholder" aria-hidden="false">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <p>
+              <strong style="color: rgba(255,255,255,0.7); display:block; margin-bottom:8px;">Aquí va tu formulario de Jotform</strong>
+              Reemplaza este bloque con el código embed de Jotform.<br>
+              Busca el comentario <code>&lt;!-- ZONA DE INSERCIÓN DE JOTFORM --&gt;</code> en el HTML.
+            </p>
           </div>
-          <!-- FIN del bloque placeholder -->
-
-          <!-- EJEMPLO de cómo debe quedar después de pegar su embed:
-          <iframe
-            id="JotFormIFrame-XXXXXXXXXXXXXXXX"
-            title="Formulario de Agendamiento — Librería Jurídica"
-            onload="window.parent.scrollTo(0,0)"
-            allowtransparency="true"
-            allow="geolocation; microphone; camera; fullscreen"
-            src="https://form.jotform.com/XXXXXXXXXXXXXXXX"
-            frameborder="0"
-            style="min-width:100%;max-width:100%;height:540px;border:none;"
-            scrolling="no"
-          ></iframe>
-          -->
-
         </div>
       </div>
-
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ==================== CTA BANNER ==================== -->
-  <section class="cta-banner">
-    <div class="container">
-      <h2>Su problema legal tiene solución. Hablemos hoy.</h2>
-      <p>No espere más. Cada día que pasa puede ser determinante para su caso. Contáctenos ahora y tome el control de su situación.</p>
-      <a href="#agendar" class="btn btn-primary">Agendar consulta gratuita →</a>
+<!-- ══ FAQ ════════════════════════════════════════════════════════════ -->
+<section id="faq" class="faq" aria-labelledby="faq-heading">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">Preguntas Frecuentes</p>
+      <h2 id="faq-heading">Todo lo que necesita saber antes de su consulta</h2>
     </div>
-  </section>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer" id="contacto">
-    <div class="container">
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-          <div class="logo">
-            <span class="logo-main">Librería Jurídica</span>
-            <span class="logo-sub">Bufete de Abogados</span>
-          </div>
-          <p class="footer-tagline">Protegemos sus derechos con estrategia, experiencia y compromiso. Desde La Paz para todo Bolivia.</p>
+    <div class="faq-grid" role="list">
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq1">
+          ¿La primera consulta tiene algún costo?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq1" role="region">
+          La primera consulta es orientativa. En ella evaluamos su situación y le informamos si podemos ayudarle, sin ningún compromiso de contratación previo.
         </div>
-
-        <div class="footer-col">
-          <h4>Servicios</h4>
-          <ul>
-            <li><a href="#servicios">Derecho Civil</a></li>
-            <li><a href="#servicios">Derecho Laboral</a></li>
-            <li><a href="#servicios">Derecho Penal</a></li>
-            <li><a href="#servicios">Derecho Corporativo</a></li>
-            <li><a href="#servicios">Derecho de Familia</a></li>
-            <li><a href="#servicios">Derecho Administrativo</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>El Bufete</h4>
-          <ul>
-            <li><a href="#experiencia">Nuestra experiencia</a></li>
-            <li><a href="#proceso">Cómo trabajamos</a></li>
-            <li><a href="#testimonios">Testimonios</a></li>
-            <li><a href="#agendar">Agendar consulta</a></li>
-            <li><a href="#">Aviso de privacidad</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h4>Contacto</h4>
-          <ul class="footer-contact">
-            <li><span>📍</span> Calle [Dirección], La Paz, Bolivia</li>
-            <li><span>📞</span> <a href="tel:+59100000000">+591 (2) 000-0000</a></li>
-            <li><span>💬</span> <a href="https://wa.me/59100000000" target="_blank">WhatsApp directo</a></li>
-            <li><span>✉️</span> <a href="mailto:contacto@libreriajuridica.bo">contacto@libreriajuridica.bo</a></li>
-            <li><span>🕐</span> Lun – Vie: 8:00 – 18:00</li>
-          </ul>
-        </div>
-
       </div>
-
-      <div class="footer-bottom">
-        <p>© 2025 Librería Jurídica. Todos los derechos reservados.</p>
-        <p><a href="#">Aviso de privacidad</a> &nbsp;·&nbsp; <a href="#">Términos de uso</a></p>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq2">
+          ¿Puedo tener una consulta en línea?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq2" role="region">
+          Sí. Ofrecemos atención presencial y videollamada. Al agendar, puede indicar su preferencia y le enviaremos el enlace de conexión con la confirmación.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq3">
+          ¿Cuánto tiempo demora resolver un caso?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq3" role="region">
+          Depende del tipo y complejidad del caso. En la primera consulta le damos un estimado realista de tiempos. Los trámites extrajudiciales suelen resolverse en semanas; los procesos judiciales pueden tomar varios meses.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq4">
+          ¿Cómo se calculan sus honorarios?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq4" role="region">
+          Presentamos una propuesta económica detallada antes de iniciar cualquier trabajo. Nuestros honorarios varían según el tipo de servicio, duración y complejidad. No hay cargos ocultos.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq5">
+          ¿Mi información es confidencial?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq5" role="region">
+          Absolutamente. Todo lo que nos comparte está protegido por el secreto profesional. Nunca compartimos información de nuestros clientes con terceros.
+        </div>
+      </div>
+      <div class="faq-item" role="listitem">
+        <button class="faq-q" aria-expanded="false" aria-controls="faq6">
+          ¿Trabajan con empresas además de personas naturales?
+          <span class="arrow" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </span>
+        </button>
+        <div class="faq-a" id="faq6" role="region">
+          Sí. Atendemos tanto a personas naturales como a empresas de todos los tamaños. Contamos con experiencia en asesoría corporativa continua, incluyendo retainers mensuales para pequeñas y medianas empresas.
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
+</main>
 
-  <!-- ==================== JS ==================== -->
-  <script>
-    // Mobile menu toggle
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
+<!-- ══ FOOTER ════════════════════════════════════════════════════════ -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="name">Librería Jurídica</p>
+        <p class="sub">Asesoría Legal · Cochabamba</p>
+        <p>Más de 15 años defendiendo los derechos de familias y empresas cochabambinas con rigor, ética y compromiso real.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Derecho Civil y Familiar</a></li>
+          <li><a href="#servicios">Derecho Laboral</a></li>
+          <li><a href="#servicios">Derecho Comercial</a></li>
+          <li><a href="#servicios">Derecho Penal</a></li>
+          <li><a href="#servicios">Derecho Inmobiliario</a></li>
+          <li><a href="#servicios">Tributario</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Cochabamba, Bolivia</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92z"/></svg>
+          <span>+591 79969542</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>contacto@libreriajuridica.bo</span>
+        </div>
+        <div style="margin-top: 20px;">
+          <a href="#consulta" style="display:inline-flex; align-items:center; gap:6px; padding:12px 20px; background:var(--gold); color:var(--ink); font-size:0.85rem; font-weight:600; border-radius:var(--radius); text-decoration:none; transition: background 0.2s;">
+            Agendar consulta
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Librería Jurídica. Todos los derechos reservados.</p>
+      <p>Diseñado para generar confianza · <a href="#inicio">Cochabamba, Bolivia</a></p>
+    </div>
+  </div>
+</footer>
 
-    hamburger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
+<!-- ══ BOTÓN FLOTANTE (MOBILE) ════════════════════════════════════════ -->
+<div class="float-cta" aria-label="Botón de acceso rápido">
+  <a href="#consulta">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <span>Agendar Consulta</span>
+  </a>
+</div>
+
+<script>
+  // ── Menú hamburguesa ────────────────────
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+    mobileMenu.setAttribute('aria-hidden', !open);
+  });
+  mobileMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', false);
+      mobileMenu.setAttribute('aria-hidden', true);
     });
+  });
 
-    // Close mobile menu on link click
-    mobileMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    });
-
-    // Smooth scroll highlight for nav
-    const sections = document.querySelectorAll('section[id], div[id]');
-    const navLinks = document.querySelectorAll('.nav-links a');
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          navLinks.forEach(link => {
-            link.style.color = '';
-            if (link.getAttribute('href') === '#' + entry.target.id) {
-              link.style.color = 'var(--gold)';
-            }
-          });
-        }
+  // ── FAQ accordion ────────────────────────
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      document.querySelectorAll('.faq-q').forEach(b => {
+        b.setAttribute('aria-expanded', 'false');
+        document.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
       });
-    }, { threshold: 0.4 });
+      if (!expanded) {
+        btn.setAttribute('aria-expanded', 'true');
+        document.getElementById(btn.getAttribute('aria-controls')).classList.add('open');
+      }
+    });
+  });
 
-    sections.forEach(s => observer.observe(s));
-  </script>
-
+  // ── Nav sombra al hacer scroll ──────────
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    nav.style.boxShadow = window.scrollY > 10 ? '0 2px 24px rgba(0,0,0,0.35)' : 'none';
+  });
+</script>
 </body>
 </html>
